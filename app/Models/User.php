@@ -3,15 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\post;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     protected $guarded = [];
     /**
@@ -44,4 +46,24 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // public function konsultasis()
+    // {
+    //     return $this->belongsToMany('App\Models\konsultasi');
+    // }
+
+    // public function members()
+    // {
+    //     return $this->hasMany(Member::class, 'user_id', 'id');
+    // }
+
+    public function post()
+    {
+        return $this->hasMany(post::class);
+    }
+
+    public function konsultasi()
+    {
+        return $this->hasMany(konsultasi::class);
+    }
 }

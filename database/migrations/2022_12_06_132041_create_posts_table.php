@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id'); //foreign key ke tabel categories dengan nama kolom category_id
             //foreign key ke tabel users dengan nama kolom user_id
+
             $table->string('tittel');
             $table->string('slug');
             $table->text('excerpt');

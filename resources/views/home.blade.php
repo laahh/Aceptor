@@ -165,10 +165,16 @@
                 adalah
                 penyakit menular akibat infeksi bakteri. TBC umumnya menyerang paru-paru, tetapi juga dapat menyerang
                 organ tubuh lain, seperti ginjal, tulang belakang, dan otak.</p>
+
+
             <button type="button"
-                class="mt-2 md:-ml-[355px] text-white bg-[#44B564] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full px-5 py-2.5 mr-2 mb-2 ">
-                Read More
+                class="mt-2 md:-ml-[355px] text-white bg-[#44B564] transition duration-700 ease-in-out focus:ring-4 focus:ring-blue-300 font-medium rounded-full px-5 py-2.5 mr-2 mb-2 ">
+                <a href="/login" role="button" class="btn btn-primary btn-lg " {{ auth()->check() ? 'disabled' : ''
+                    }}>Read More</a>
             </button>
+
+
+
         </div>
 
         <div class="">
@@ -244,8 +250,11 @@
                 <li class="flex pt-2"><img src="img/virus.png" width="30px" alt="" /> <span class="pl-2 pt-1">Penurunan
                         berat badan</span></li>
                 <li class="flex pt-5 pl-2">
-                    <img src="img/circle.png" class="absolute" width="30px" alt="" /> <span class="pl-4 pt-1">Detail
-                        Informasi</span><svg class="pt-2" style="width: 24px; height: 24px" viewBox="0 0 24 24">
+                    <img src="img/circle.png" class="absolute" width="30px" alt="" /> <span class="pl-4 pt-1"><a
+                            href="/login" role="button" class="btn btn-primary btn-lg" {{ auth()->check() ? 'disabled' :
+                            ''
+                            }}>Detail Informasi</a></span><svg class="pt-2" style="width: 24px; height: 24px"
+                        viewBox="0 0 24 24">
                         <path fill="currentColor" d="M14 16.94V12.94H5.08L5.05 10.93H14V6.94L19 11.94Z" />
                     </svg>
                 </li>

@@ -28,8 +28,12 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
-            return redirect()->intended('apa-itu-tbc')->with('loginSuccess', 'Login Berhasil');
+            $redirect = '/apa-itu-tbc';
+            if (Auth::user()->hasRole('admin')) {
+                // dd('admin');
+                $redirect = '/admin-dashboard';
+            }
+            return redirect()->intended($redirect)->with('loginSuccess', 'Login Berhasil');
         }
         return back()->with('loginError', 'Login Gagal');
     }

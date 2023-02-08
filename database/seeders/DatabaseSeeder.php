@@ -2,12 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
+use Carbon\Carbon;
 use App\Models\Post;
-use App\Models\admin;
 use App\Models\User;
+use App\Models\admin;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
+use App\Models\rumahsakit;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,40 +22,32 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Category::create([
-            'name' => 'Cegah Penyakit TBC',
-            'slug' => 'cegah-penyakit-tbc',
-        ]);
+        $permissions = Permission::all();
 
-        Category::create([
-            'name' => 'Diagnoisis Penyakit TBC',
-            'slug' => 'diagnoisis-penyakit-tbc',
-        ]);
+        //get role admin
+        //role admin ana neng id  5
+        $role = Role::find(5);
 
-        Category::create([
-            'name' => 'Pengobatan',
-            'slug' => 'pengobatan',
-        ]);
-        Category::create([
-            'name' => 'Kasus Penyakit TBC',
-            'slug' => 'kasus-penyakit-tbc',
-        ]);
-        Category::create([
-            'name' => 'Penyakit TBC',
-            'slug' => 'penyakit-tbc',
-        ]);
+        // masukna id 5 dengan nama role adin 
+        //assign permission to role
+        $role->syncPermissions($permissions);
 
+        //assign role to user
+        //user id 4 dimasukan ke role admin 
+        $user = User::find(4);
+        $user->assignRole($role);
 
-
-        post::factory(20)->create();
-
-        user::factory(10)->create();
-
-        admin::create([
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('admin123'),
-            'created_at' => now(),
+        //get role leader
+        $role = Role::find(2);
+        $role->syncPermissions([
+            'artikel.index',
+            'artikel.create',
+            'artikel.edit',
+            'artikel.delete',
+            'konsultasi.index',
+            'konsultasi.create',
+            'konsultasi.edit',
+            'konsultasi.delete',
 
         ]);
     }

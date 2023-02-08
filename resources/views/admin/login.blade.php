@@ -23,7 +23,7 @@
                             <p class="mb-0">Enter your email and password to sign in</p>
                         </div>
                         <div class="flex-auto p-6">
-                            <form action="admin-login" method="post">
+                            <form action="/login" method="post">
                                 @csrf
                                 <label class="mb-2 ml-1 font-bold text-xs text-slate-700">Email</label>
                                 <div class="mb-4">

@@ -1,17 +1,4 @@
-<!--
-    =========================================================
-    * Soft UI Dashboard Tailwind - v1.0.4
-    =========================================================
-    
-    * Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-tailwind
-    * Copyright 2022 Creative Tim (https://www.creative-tim.com)
-    * Licensed under MIT (https://www.creative-tim.com/license)
-    * Coded by Creative Tim
-    
-    =========================================================
-    
-    * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
+
 <!DOCTYPE html>
 <html>
 
@@ -31,6 +18,8 @@
     <link href="{{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
     <!-- Popper -->
     <script src="https://unpkg.com/@popperjs/core@2"></script>
+
+
     <!-- Main Styling -->
     <link href="{{asset('assets/css/soft-ui-dashboard-tailwind.css?v=1.0.4')}}" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" />

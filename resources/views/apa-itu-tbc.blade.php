@@ -15,13 +15,13 @@
                     <button
                         class="inline-block p-4 rounded-t-lg border-b-2 text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 border-blue-600 text-lg dark:border-blue-500"
                         id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile"
-                        aria-selected="true">Pengertian</button>
+                        aria-selected="true">{{ get_meta_value('judul') }}</button>
                 </li>
                 <li class="mr-2" role="presentation">
                     <button
                         class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-lg text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
                         id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab"
-                        aria-controls="dashboard" aria-selected="false">Penyebab</button>
+                        aria-controls="dashboard" aria-selected="false">{{ get_meta_value1('judul') }}</button>
                 </li>
                 <li class="mr-2" role="presentation">
                     <button
@@ -39,64 +39,19 @@
         </div>
         <div id="myTabContent">
             <div class="p-4  rounded-lg dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <h1 class=" text-xl font-Poppins">Tuberkulosis atau TBC </h1>
-                <img src="img/apa-tbc.jpg" class="float-left mt-6 mr-3" width="300px" alt="">
-                <p class="text-base pt-5 text-gray-500 dark:text-gray-400">Tuberkulosis atau TBC adalah penyakit yang
-                    disebabkan oleh infeksi bakteri Mycobacterium tuberculosis di paru. Kondisi ini, kadang disebut juga
-                    dengan TB paru. Bakteri tuberkulosis yang menyerang paru menyebabkan gangguan pernapasan, seperti
-                    batuk kronis dan sesak napas. Penderita TBC biasanya juga mengalami gejala lain seperti berkeringat
-                    di malam hari dan demam. Pengobatan penyakit tuberkulosis biasanya membutuhkan waktu berbulan-bulan
-                    dengan aturan minum obat yang ketat guna mencegah risiko terjadinya resistensi antibiotik. <br> <br>
-                    Jika
-                    tidak ditangani dengan segera, TBC dapat berakibat fatal. Bakteri Mycobacterium tuberculosis dapat
-                    menginfeksi bagian organ tubuh lainnya, seperti ginjal, tulang, sendi, kelenjar getah bening, atau
-                    selaput otak, kondisi ini dinamakan dengan TB ekstra paru. Indonesia berada di urutan ke 3 negara
-                    dengan kasus TBC tertinggi di dunia setelah India dan Cina. Data tahun 2019 menunjukkan, ada sekitar
-                    845.000 penderita TBC di Indonesia. Penyakit ini dapat berakibat fatal bagi penderitanya jika tidak
-                    segera ditangani. Meski begitu, TBC adalah penyakit yang dapat disembuhkan dan bisa dicegah.</p>
+                <p class="text-base  text-gray-500 dark:text-gray-400">{!! get_meta_value('isi') !!}</p>
 
                 <iframe id="embedded-human" frameBorder="0" style="aspect-ratio: 1 / 1; width: 100%"
                     allowFullScreen="true" loading="lazy"
                     src="https://human.biodigital.com/viewer/?id=4y7R&ui-anatomy-descriptions=false&ui-anatomy-labels=true&ui-audio=true&ui-chapter-list=false&ui-fullscreen=true&ui-help=true&ui-info=true&ui-label-list=true&ui-layers=true&ui-loader=circle&ui-media-controls=full&ui-menu=true&ui-nav=true&ui-search=true&ui-tools=true&ui-tutorial=true&ui-undo=true&ui-whiteboard=true&initial.none=true&disable-scroll=false&uaid=KMjkW&paid=o_3b04a6f0"></iframe>
 
-                <p class="text-base pt-5 text-gray-500">Menurut WHO, sebanyak 1,5 juta orang meninggal akibat penyakit
-                    TBC di tahun 2020. Penyakit ini merupakan penyakit dengan urutan ke–13 yang paling banyak
-                    menyebabkan kematian, dan menjadi penyakit menular nomor dua yang paling mematikan setelah COVID-19
-                </p>
+
             </div>
             <div class="hidden p-4  rounded-lg " id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                 <h1 class=" text-xl">Penyebab TBC </h1>
                 <img src="img/3.jpg" class="float-left" width="400px" alt="">
-                <p class="text-base pt-5 text-gray-500 mt-5">Tuberkulosis (TBC) disebabkan oleh infeksi bakteri
-                    Mycobacterium tuberculosis. Bakteri ini menyebar
-                    ketika seseorang menghirup percikan ludah (droplet) saat penderita TBC batuk, berbicara, bersin,
-                    tertawa, atau bernyanyi.
-                    <br> <br>
+                <p class="text-base  text-gray-500 ">{!! get_meta_value('isi') !!} </p>
 
-                    Meski demikian, penularan TBC membutuhkan kontak yang cukup dekat dan cukup lama dengan penderita.
-                    Makin lama seseorang berinteraksi dengan penderita TBC, makin tinggi pula risikonya tertular. Oleh
-                    sebab itu, penularan lebih sering terjadi pada anggota keluarga yang tinggal serumah dengan
-                    penderita TBC.
-
-                    <br> <br>
-
-                    Pada penderita TBC yang tidak mengalami gejala (TBC laten), bakteri TBC tetap tinggal di dalam
-                    tubuhnya. Bakteri TBC dapat berkembang menjadi aktif jika daya tahan tubuh penderita melemah. Namun,
-                    penderita TBC laten ini tidak menularkan bakteri penyebab TBC ke orang lain.
-
-                    Meski TBC dikategorikan sebagai penyakit menular, penularan penyakit ini tidak secepat pilek dan
-                    flu. Namun, ada beberapa kelompok yang berisiko tinggi tertular TBC, yaitu:
-                </p>
-                <ul class="list-disc px-10 text-base  text-gray-500 mt-3">
-                    <li>Orang yang tinggal di pemukiman padat dan kumuh</li>
-                    <li>Petugas medis yang sering merawat penderita TBC</li>
-                    <li>Orang lanjut usia (lansia) dan anak-anak</li>
-                    <li>Pengguna NAPZA</li>
-                    <li>Penderita penyakit ginjal stadium lanjut</li>
-                    <li>Orang yang mengalami kekurangan gizi</li>
-                    <li>Penderita kecanduan alkohol</li>
-                    <li>Perokok</li>
-                </ul>
 
 
             </div>

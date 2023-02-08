@@ -2,10 +2,134 @@
 @section('content')
 
 
+<div class="grid grid-cols-6 gap-4">
+    <div class="col-start-1 col-end-3">
+        <h1 class="mx-10 my-5 font-Poppins">Artikel </h1>
+    </div>
+    <div class="col-end-7 col-span-2 mt-10">
+        @role('dokter')
 
-<div>
-    <h1 class="mx-10 my-5 font-Poppins">Artikel </h1>
+        <button
+            class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            type="button" data-modal-toggle="medium-modal-1">
+            + Create Artikel
+        </button>
+
+        @endrole
+    </div>
+
 </div>
+
+
+
+
+<div id="medium-modal-1" tabindex="-1"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full ">
+    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto ">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button"
+                class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                data-modal-toggle="medium-modal-1">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd"></path>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="py-6 px-6 lg:px-8">
+                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create Room Konsultasi</h3>
+                <form method="POST" action="/artikel" enctype="multipart/form-data">
+                    @csrf
+                    <div class="grid gap-6 mb-6 md:grid-cols-2">
+                        <div>
+                            <label for="tittel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Title</label>
+                            <input type="text" id="tittel"
+                                class="bg-gray-50 border border-gray-300  text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+                                required autofocus name="tittel">
+
+                        </div>
+                        <div>
+                            <label for="slug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Slug</label>
+                            <input type="text" id="slug"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required name="slug">
+                        </div>
+                        <div>
+                            <label for="excerpt"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Excerpt</label>
+                            <input type="text" id="excerpt"
+                                class="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required name="excerpt">
+                        </div>
+
+                        <div>
+                            <label for="category"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
+                                Category</label>
+                            <select id="category"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                name="category_id">
+                                <option selected>Choose a Category</option>
+                                @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image">Upload
+                            Image</label>
+                        <img class="w-80 rounded-md img-preview">
+                        <input
+                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            id="image" type="file" name="image" onchange="previewImage()">
+
+                    </div>
+                    <div class="">
+                        <label for="body" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Isi
+                        </label>
+                        <textarea type="text" id="body" name="body" value="{{ old('isi') }}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Pengertian " required> {{ get_meta_value('isi') }} </textarea>
+                    </div>
+                    {{-- <div>
+                        <label for="body"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">body</label>
+                        <input id="body" type="hidden" name="body" required>
+                        <trix-editor input="body"></trix-editor>
+
+                    </div> --}}
+
+
+
+
+                    <button type="submit" onclick="swal('Good job!', 'Artikel Berhasil Dibuat!', 'success')"
+                        class="mt-5 create inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                        Publish post
+                    </button>
+
+
+
+
+
+
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <form action="/artikel" class="block mx-5 mb-5 md:hidden">
 
@@ -103,45 +227,7 @@
 </article>
 
 
-
-
-
-
-
-{{-- <div
-    class="max-w-xl items-center lg:mt-10 p-6 mx-auto bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-    <img src="" alt="">
-
-    <h5 class=" mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $posts[0]->tittel }}<span
-            class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
-            <a href="/blog?category={{ $posts[0]->category->slug }} ">{{ $posts[0]->category->name }}</a> </span> </h5>
-
-
-    <p class="mb-2"> <a href=""></a> at: {{
-        $posts[0]->created_at->diffForHumans() }} </p>
-    <p class=" mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $posts[0]->excerpt }}</p>
-    <a href="post/{{ $posts[0]->slug}}"
-        class=" inline-flex mx-auto items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Read more
-        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd"
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clip-rule="evenodd"></path>
-        </svg>
-    </a>
-</div> --}}
-
-<!--
-  This component uses @tailwindcss/line-clamp
-
-  yarn add @tailwindcss/line-clamp
-  npm install @tailwindcss/line-clamp
-
-  plugins: [require('@tailwindcss/line-clamp')]
--->
-
-<div class="mx-6 grid grid-cols-1 sm:grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-3 mt-10 mb-10">
+<div class="mx-5 grid grid-cols-1 sm:grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-3 mt-10 mb-10">
     @foreach($posts->skip(1) as $post)
     <article class="overflow-hidden rounded-lg border border-gray-100 shadow-sm  transition hover:shadow-lg">
         @if ($post->image)
@@ -184,49 +270,6 @@
 
 
 
-
-
-
-
-
-
-
-{{-- <div class=" mx-6 grid grid-cols-1 sm:grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-3 mt-10 mb-20"> --}}
-
-    {{-- @foreach($posts->skip(1) as $post) --}}
-
-    {{-- skip 1 to skip the first post in the loop --}}
-    {{-- <div class="shadow-lg rounded-t-md overflow-hidden ">
-        <div class="">
-            <img class="w-sm"
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-                alt="" />
-            <div class="p-2 relative">
-                <p class="text-lg mt-6 font-semibold">{{ $post->tittel }}</p>
-                <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">{{
-                    $post->category->name }}</span>
-                <p>{{ $post->excerpt}}</p>
-                <div class="flex -space-x-4 justify-between mt-1">
-                    <div>
-                    </div>
-                    <div class="">
-                        <button type="button"
-                            class="text-white  bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><a
-                                href="post/{{ $post->slug}}">Detail</a></button>
-                    </div>
-                </div>
-
-
-                <img class="h-12 w-12 rounded-full absolute -top-6 p-0.5 border-2 right-6"
-                    src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-                    alt="" />
-            </div>
-        </div>
-    </div> --}}
-
-    {{-- @endforeach --}}
-    {{-- </div> --}}
-
 <div class="mx-10">
     {{ $posts->links() }}
 
@@ -240,7 +283,158 @@
 
 @endif
 
+<script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
 
+
+
+
+
+<script>
+    class MyUploadAdapter {
+    constructor( loader ) {
+        // The file loader instance to use during the upload.
+        this.loader = loader;
+    }
+
+    // Starts the upload process.
+    upload() {
+        return this.loader.file
+            .then( file => new Promise( ( resolve, reject ) => {
+                this._initRequest();
+                this._initListeners( resolve, reject, file );
+                this._sendRequest( file );
+            } ) );
+    }
+
+    // Aborts the upload process.
+    abort() {
+        if ( this.xhr ) {
+            this.xhr.abort();
+        }
+    }
+
+    // Initializes the XMLHttpRequest object using the URL passed to the constructor.
+    _initRequest() {
+        const xhr = this.xhr = new XMLHttpRequest();
+
+        // Note that your request may look different. It is up to you and your editor
+        // integration to choose the right communication channel. This example uses
+        // a POST request with JSON as a data structure but your configuration
+        // could be different.
+        xhr.open( 'POST', '{{ route('ckeditor.upload') }}', true );
+        xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+        xhr.responseType = 'json';
+    }
+
+    // Initializes XMLHttpRequest listeners.
+    _initListeners( resolve, reject, file ) {
+        const xhr = this.xhr;
+        const loader = this.loader;
+        const genericErrorText = `Couldn't upload file: ${ file.name }.`;
+
+        xhr.addEventListener( 'error', () => reject( genericErrorText ) );
+        xhr.addEventListener( 'abort', () => reject() );
+        xhr.addEventListener( 'load', () => {
+            const response = xhr.response;
+
+            // This example assumes the XHR server's "response" object will come with
+            // an "error" which has its own "message" that can be passed to reject()
+            // in the upload promise.
+            //
+            // Your integration may handle upload errors in a different way so make sure
+            // it is done properly. The reject() function must be called when the upload fails.
+            if ( !response || response.error ) {
+                return reject( response && response.error ? response.error.message : genericErrorText );
+            }
+
+            // If the upload is successful, resolve the upload promise with an object containing
+            // at least the "default" URL, pointing to the image on the server.
+            // This URL will be used to display the image in the content. Learn more in the
+            // UploadAdapter#upload documentation.
+            resolve( {
+                default: response.url
+            } );
+        } );
+
+        // Upload progress when it is supported. The file loader has the #uploadTotal and #uploaded
+        // properties which are used e.g. to display the upload progress bar in the editor
+        // user interface.
+        if ( xhr.upload ) {
+            xhr.upload.addEventListener( 'progress', evt => {
+                if ( evt.lengthComputable ) {
+                    loader.uploadTotal = evt.total;
+                    loader.uploaded = evt.loaded;
+                }
+            } );
+        }
+    }
+
+    // Prepares the data and sends the request.
+    _sendRequest( file ) {
+        // Prepare the form data.
+        const data = new FormData();
+
+        data.append( 'upload', file );
+
+        // Important note: This is the right place to implement security mechanisms
+        // like authentication and CSRF protection. For instance, you can use
+        // XMLHttpRequest.setRequestHeader() to set the request headers containing
+        // the CSRF token generated earlier by your application.
+
+        // Send the request.
+        this.xhr.send( data );
+    }
+}
+
+// ...
+
+function MyCustomUploadAdapterPlugin( editor ) {
+    editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
+        // Configure the URL to the upload script in your back-end here!
+        return new MyUploadAdapter( loader );
+    };
+}
+
+// ...
+
+ClassicEditor
+    .create( document.querySelector( '#body' ), {
+        extraPlugins: [ MyCustomUploadAdapterPlugin ],
+
+        // ...
+    } )
+    .catch( error => {
+        console.log( error );
+    } );
+
+</script>
+
+<script>
+    const tittel = document.querySelector('#tittel');
+    const slug = document.querySelector('#slug');
+
+    tittel.addEventListener('change', function() {
+        fetch('/admin-artikel/CheckSlug?tittel=' + tittel.value)
+            .then(response => response.json())
+            .then(data => slug.value = data.slug)
+    });
+
+    function previewImage() {
+        const image = document.querySelector('#image');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        };
+    }
+
+   
+</script>
 
 
 
@@ -250,3 +444,146 @@
 
 
 @endsection
+
+@push('script')
+
+<script>
+    function removeChild(e){
+      e.remove()
+    }
+    
+
+    public int checkAssesment(int n){
+      int result = 0;
+      for(int i = 0; i*i <n; i++){
+        result += i;
+      }
+
+      return result;
+    }
+
+    function tambahChild(e, id)
+    {
+      
+      let parent = e.parentNode;
+      let buyut = parent.parentNode;
+      
+      
+      
+      let relativeChild = document.createElement('div');
+      relativeChild.className = "relative";
+      
+      let child1Relative = document.createElement('input');
+      child1Relative.className = 'block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500';
+      child1Relative.placeholder = 'qualification';
+      child1Relative.name = `requirement[${id}][qualification][]`;
+      
+      
+      let child2Relative = document.createElement('button');
+      child2Relative.type = 'button';
+      child2Relative.className = 'text-white absolute right-2.5 bottom-2.5 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800';
+      childIconRelative = document.createElement('i')
+      childIconRelative.className = 'bx bxs-minus-circle'
+      child2Relative.appendChild(childIconRelative);
+      child2Relative.onclick = () =>{
+        removeChild(relativeChild);
+      }
+      
+      relativeChild.appendChild(child1Relative)
+      relativeChild.appendChild(child2Relative)
+      
+      buyut.appendChild(relativeChild);
+      
+    }
+    
+    
+    let count = 0;
+    
+    function tambah(){
+      
+      
+      let id = ++count;
+      let el = document.getElementById('requirement');
+      
+      let parent = document.createElement('div');
+      parent.className = 'flex justify-between gap-x-2 flex-row items-center mb-3';
+      
+      let parentInput1 = document.createElement('div');
+      parentInput1.className = 'basis-[30%]';
+      let child1 = document.createElement('input');
+      child1.name = `requirement[${id}][role]`;
+      child1.className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white';
+      child1.placeholder = 'role...'
+      parentInput1.appendChild(child1)
+      
+      
+      let parentInput2 = document.createElement('div');
+      parentInput2.className = 'basis-[40%]';
+      
+      let relativeChild = document.createElement('div');
+      relativeChild.className = "relative";
+      
+      let child1Relative = document.createElement('input');
+      child1Relative.className = 'block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500';
+      child1Relative.placeholder = 'qualification';
+      child1Relative.name = `requirement[${id}][qualification][]`;
+      
+      let child2Relative = document.createElement('button');
+      child2Relative.type = 'button';
+      child2Relative.className = 'text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800';
+      childIconRelative = document.createElement('i')
+      childIconRelative.className = 'bx bxs-plus-circle'
+      child2Relative.appendChild(childIconRelative);
+      child2Relative.onclick = (id) =>{
+        tambahChild(child2Relative, count);
+      }
+      
+      relativeChild.appendChild(child1Relative)
+      relativeChild.appendChild(child2Relative)
+      
+      
+      
+      parentInput2.appendChild(relativeChild);
+      
+      let parentInput3 = document.createElement('div');
+      parentInput3.className = 'basis-1/8';
+      let button = document.createElement('button');
+      button.type = 'button';
+      let icon = document.createElement('i');
+      icon.className='bx bxs-minus-circle';
+      button.appendChild(icon);
+      button.onclick = () => {
+        remove(button);
+      }
+      parentInput3.appendChild(button);
+      
+      let parentInput4 = document.createElement('div');
+      parentInput4.className = 'basis-[30%]'
+      parentInput4.innerHTML = `<input type="text" name="requirement[${id}][salary]" id="requirement" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="salary..." required>`
+      
+      parent.appendChild(parentInput1)
+      parent.appendChild(parentInput4)
+      parent.appendChild(parentInput2)
+      parent.appendChild(parentInput3)
+      
+      
+      el.appendChild(parent)
+    }
+    
+    function sweatAlert()
+    {
+      Swal.fire(
+      'Create Team Success',
+      'You clicked the button!',
+      'success'
+      )
+    }
+    
+    function remove(e) {
+      let parent1 = e.parentNode;
+      parent1.parentNode.remove();
+    }
+    
+    
+</script>
+@endpush
